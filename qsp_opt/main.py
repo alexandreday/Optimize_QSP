@@ -68,6 +68,7 @@ class QSP:
 
 ###################################################################################
 ###################################################################################
+# ---------------> 
 ###################################################################################
 ###################################################################################
 
@@ -182,16 +183,21 @@ def SA(param, model:MODEL):
 
 def run_SD(parameters, model:MODEL, utils, save = True):
     
-    if parameters['verbose'] == 0:
-        blockPrint()
- 
     outfile = utils.make_file_name(parameters,root=parameters['root'])
     n_exist_sample, all_result = utils.read_current_results(outfile)
     n_sample = parameters['n_sample']
 
     if n_exist_sample >= n_sample :
-        print("\n\n-----------> Samples already computed in file -- terminating ... <-----------")
+        print("Samples already computed in file --> terminating...")
+        print("Goodbye !")
         return all_result
+    elif n_exist_sample == 0:
+        print("New data file, 0 samples availables... ")
+    else:
+        print("Appending data file, %i samples availables... \n"%n_exist_sample)
+
+    if parameters['verbose'] == 0:
+        blockPrint()
 
     print("\n\n-----------> Starting stochastic descent <-----------")
     
