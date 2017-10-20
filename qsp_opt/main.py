@@ -1,66 +1,70 @@
 '''
-Created on May 14 , 2017
+Created on Oct, 20, 2017
 
-@author: Alexandre Day
+@author: Alexandre Day, Marin Bukov 
 
-Purpose: (PYTHON3 IMPLEMENTATION)
-    Implements different flavors of simulated annealing for 1D spin chain with uniform hz-field and uniform and time varying hx-field
-    Can be run by specifying simulation parameters in the file called 'para.dat'
-
+Implements different optimzation methods for quantum state preparation.
+Includes:
+    Stochastic descent (multi-spin flip)
+    Simulated annealing 
+    GRAPE
 '''
 
-from utils import UTILS
+from .utils import UTILS
 import numpy as np
-import pickle
-from Hamiltonian import HAMILTONIAN
+from .Hamiltonian import HAMILTONIAN
 from quspin.operators import exp_op
-import time,sys,os
+import time, sys, os, pickle
 from itertools import product
-from model import MODEL
-#from analysis.compute_observable import MB_observables
+from .model import MODEL
     
 np.set_printoptions(precision=4)
 
-def main():
-    # Utility object for reading, writing parameters, etc. 
-    utils = UTILS()
+class QSP:
+    def __init__(self, argv = None, parameter_file = "para.dat"):
+        # Utility object for reading, writing parameters, etc. 
+        self.utils = UTILS()
+        
+        # Reading parameters from para.dat file
+        self.parameters = self.utils.read_parameter_file(file=parameter_file)
+        
+        # Command line specified parameters overide parameter file values
+        if argv is not None:
+            self.utils.read_command_line_arg(self.parameters, sys.argv)
 
-    # Reading parameters from para.dat file
-    parameters = utils.read_parameter_file()
+        # Printing parameters for user to see
+        self.utils.print_parameters(self.parameters)
+
+        # Defining Hamiltonian
+        self.H = HAMILTONIAN(**self.parameters)
+
+        # Defines the model, and precomputes evolution matrices given set of states
+        self.model = MODEL(self.H, self.parameters)
     
-    # Command line specified parameters overide parameter file values
-    utils.read_command_line_arg(parameters,sys.argv)
-    print(parameters)    
-    # Printing parameters for user
-    utils.print_parameters(parameters)
+    def run(self):
+         # Run simulated annealing
+        parameters = self.parameters
+        model = self.model
+        utils = self.utils
 
-    # Defining Hamiltonian
-    H = HAMILTONIAN(**parameters)
+        if parameters['task'] ==  'SA':
+            print("Simulated annealing")
+            run_SA(parameters, model, utils)
+        elif parameters['task'] == 'GB':
+            print("Gibbs sampling") 
+            run_GS(parameters, model)
+        elif parameters['task'] == 'SD' or parameters['task'] == 'SD2' or parameters['task'] == 'SD2M0':
+            print("Stochastic descent with task = %s"%parameters['task']) # options are [SD, SD2, SD2M0]
+            run_SD(parameters, model, utils)
+        elif parameters['task'] == 'ES':
+            print("Exact spectrum")
+            run_ES(parameters, model, utils)
+        elif parameters['task'] == 'SASD':
+            print("Simulating annealing followed by stochastic descent")
+            run_SA(parameters, model, utils)
+        else:
+            print("Wrong task option used")
 
-    # Defines the model, and precomputes evolution matrices given set of states
-    model = MODEL(H, parameters)
-    
-    # Run simulated annealing
-    if parameters['task'] ==  'SA':
-        print("Simulated annealing")
-        run_SA(parameters, model, utils)
-    elif parameters['task'] == 'GB':
-        print("Gibbs sampling") 
-        run_GS(parameters, model)
-    elif parameters['task'] == 'SD' or parameters['task'] == 'SD2' or parameters['task'] == 'SD2M0':
-        print("Stochastic descent with task = %s"%parameters['task']) # options are [SD, SD2, SD2M0]
-        run_SD(parameters, model, utils)
-    elif parameters['task'] == 'ES':
-        print("Exact spectrum")
-        run_ES(parameters, model, utils)
-    elif parameters['task'] == 'SASD':
-        print("Simulating annealing followed by stochastic descent")
-        run_SA(parameters, model, utils)
-    else:
-        print("Wrong task option used")
-
-    exit()
-    
 
 ###################################################################################
 ###################################################################################
