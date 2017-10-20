@@ -4,4 +4,3 @@ import sys
 # example run:
 model = QSP(argv = sys.argv)
 model.run()
-
