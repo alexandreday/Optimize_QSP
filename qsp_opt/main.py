@@ -5,7 +5,7 @@ Created on Oct, 20, 2017
 
 Implements different optimzation methods for quantum state preparation.
 Includes:
-    Stochastic descent (multi-spin flip)
+    Stochastic descent (single and two spin flip)
     Simulated annealing 
     GRAPE
 '''
