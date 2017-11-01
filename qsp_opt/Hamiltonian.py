@@ -9,14 +9,18 @@ import numpy as np
 
 class HAMILTONIAN:
 	# Time dependent Hamiltonian class
-	def __init__(self, L=1 , J=1.0, hz = 1.0, hx_min=-4., hx_max =4., dh=2., n_step=1, **kwargs): # N is the number of time steps
+	def __init__(self, L=1 , J=1.0, hz = 1.0, hx_min=-4., hx_max =4., dh=2., n_step=1, symm =True ,**kwargs): # N is the number of time steps
 		#basis = spin_basis_1d(L=L,pauli=False)
 		fct_arg=[]
 		ones=[[-1,i] for i in range(L)]
 		z_field=[[-hz,i] for i in range(L)]
 
 		if L>1:
-			basis = spin_basis_1d(L=L,pauli=False,kblock=0,pblock=1) # include symmetries (momentum and parity sectors)
+			if symm is True:
+				basis = spin_basis_1d(L=L,pauli=False,kblock=0,pblock=1) # include symmetries (momentum and parity sectors)
+			else:
+				basis = spin_basis_1d(L=L,pauli=False) # w/o symmetries
+			
 			zz_int =[[-J,i,(i+1)%L] for i in range(L)] # Has periodic boundary conditions
 			static = [["zz",zz_int], ["z",z_field]]
 		else:

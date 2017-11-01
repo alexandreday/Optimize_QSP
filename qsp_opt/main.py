@@ -18,10 +18,10 @@ import time, sys, os, pickle
 from itertools import product
 from .model import MODEL
     
-np.set_printoptions(precision=4)
+np.set_printoptions(precision=10)
 
 class QSP:
-    def __init__(self, argv = None, parameter_file = "para.dat"):
+    def __init__(self, argv = None, parameter_file = "para.dat", symm = True):
         # Utility object for reading, writing parameters, etc. 
         self.utils = UTILS()
         
@@ -36,7 +36,7 @@ class QSP:
         self.utils.print_parameters(self.parameters)
 
         # Defining Hamiltonian
-        self.H = HAMILTONIAN(**self.parameters)
+        self.H = HAMILTONIAN(symm=symm, **self.parameters)
 
         # Defines the model, and precomputes evolution matrices given set of states
         self.model = MODEL(self.H, self.parameters)
