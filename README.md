@@ -16,5 +16,10 @@ git clone https://github.com/alexandreday/Optmize_QSP.git
 cd Optimize_QSP
 pip install . --upgrade
 ```
+Another way is just to pull from the original Optimize_QSP repository:
+```
+git pull origin master
+pip install . --upgrade
+```
 
 
