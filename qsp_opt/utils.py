@@ -178,6 +178,8 @@ class UTILS:
 						['hx_min','float-2'],
 						['dh','float-2']
 		]
+		if parameters['dt'] < 0:
+			parameters['dt'] = parameters['T']/parameters['n_step']
 
 		n_param=len(param_and_type)
 		param_value=[0]*n_param

@@ -21,7 +21,7 @@ from .model import MODEL
 np.set_printoptions(precision=10)
 
 class QSP:
-    def __init__(self, argv = None, parameter_file = "para.dat", symm = True):
+    def __init__(self, argv = None, parameter_file = "para.dat", symm = True, verbose=True, quick_check=False):
         # Utility object for reading, writing parameters, etc. 
         self.utils = UTILS()
         
@@ -32,14 +32,16 @@ class QSP:
         if argv is not None:
             self.utils.read_command_line_arg(self.parameters, sys.argv)
 
+        if verbose is True:
         # Printing parameters for user to see
-        self.utils.print_parameters(self.parameters)
+            self.utils.print_parameters(self.parameters)
 
-        # Defining Hamiltonian
-        self.H = HAMILTONIAN(symm=symm, **self.parameters)
+        if quick_check is False:
+            # Defining Hamiltonian
+            self.H = HAMILTONIAN(symm=symm, **self.parameters)
 
-        # Defines the model, and precomputes evolution matrices given set of states
-        self.model = MODEL(self.H, self.parameters)
+            # Defines the model, and precomputes evolution matrices given set of states
+            self.model = MODEL(self.H, self.parameters)
     
     def run(self):
          # Run simulated annealing
@@ -64,7 +66,27 @@ class QSP:
             run_SA(parameters, model, utils)
         else:
             print("Wrong task option used")
+    
+    def evaluate_protocol(self, protocol):
+        return self.model.compute_fidelity(protocol = protocol)
 
+    def random_protocol(self):
+        return np.random.randint(0, self.model.n_h_field, size=self.parameters['n_step'])
+
+    def flip(self, p, i):
+        ptmp = np.copy(p)
+        ptmp[i]^=1
+        return ptmp
+    
+    def make_file_name(self, parameters = None):
+        from copy import deepcopy as dp
+        param_tmp = dp(self.parameters)
+        if parameters is not None:
+            for k, v in parameters.items():
+                param_tmp[k]=v
+            
+        fname = self.utils.make_file_name(param_tmp)
+        return fname
 
 ###################################################################################
 ###################################################################################

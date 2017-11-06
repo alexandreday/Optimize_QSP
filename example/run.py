@@ -1,6 +1,30 @@
 from qsp_opt import QSP
 import sys
+import numpy as np
 
 # example run:
 model = QSP(argv = sys.argv)
 model.run()
+exit()
+np.random.seed(0)
+p = model.random_protocol()
+print(p)
+f=model.evaluate_protocol(p)
+print(f)
+print('------')
+p2 = model.flip(p,0)
+print(model.evaluate_protocol(p2))
+print(p2)
+print('------')
+p3 = model.flip(p2,2)
+print(model.evaluate_protocol(p3))
+print(p3)
+print('--------')
+p4 = model.flip(p3,5)
+print(model.evaluate_protocol(p4))
+print(p4)
+print('--------')
+p5 = model.flip(p4,6)
+print(model.evaluate_protocol(p5))
+print(p5)
+print('--------')
