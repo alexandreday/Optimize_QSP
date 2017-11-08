@@ -133,7 +133,7 @@ class UTILS:
 		print("{0:<30s}{1:<5.2f}".format('hx_final_state',hx_final_state))
 
 		print("{0:<30s}{1:<5d}".format('n_quench',n_quench))
-		print("{0:<30s}{1:<5.2f}".format('dt',dt))
+		print("{0:<30s}{1:<5.4f}".format('dt',dt))
 		print("{0:<30s}{1:<5d}".format('n_sample',n_sample))
 		print("{0:<30s}{1:<5d}".format('n_step',n_step))
 		

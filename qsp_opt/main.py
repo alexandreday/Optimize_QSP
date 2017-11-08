@@ -30,7 +30,7 @@ class QSP:
         
         # Command line specified parameters overide parameter file values
         if argv is not None:
-            self.utils.read_command_line_arg(self.parameters, sys.argv)
+            self.utils.read_command_line_arg(self.parameters, argv)
 
         if verbose is True:
         # Printing parameters for user to see
