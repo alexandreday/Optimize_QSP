@@ -6,6 +6,8 @@ import pickle
 
 # example run:
 model = QSP(argv = sys.argv)#, quick_check=True, verbose=False)
+model.run()
+exit()87
 
 samples_f = []
 n_step = model.parameters['n_step']

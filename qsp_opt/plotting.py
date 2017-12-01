@@ -4,8 +4,10 @@ import sys,os
 from sklearn.neighbors import KernelDensity 
 from sklearn import preprocessing as prep
 
-    
 def density_map(X, kde, savefile='test.png', show=True, xlabel=None, ylabel=None, n_mesh = 400, vmin = None, vmax= None, compute_zmax = False):
+    
+    from sklearn.neighbors import KernelDensity 
+    from sklearn import preprocessing as prep
 
     plt.rc('text', usetex=True)
     font = {'family' : 'serif', 'size': 18}
@@ -59,7 +61,7 @@ def density_map(X, kde, savefile='test.png', show=True, xlabel=None, ylabel=None
     #plt.show()
 
 
-def protocol(time_slice,protocol_array,title=None,out_file=None,labels=None,show=True,ylabel='$h_x(t)$',xlabel="$t$"):
+def protocol(time_slice,protocol_array,title=None,out_file=None,labels=None,show=True,ylabel='$h_x(t)$',xlabel="$t$",lw=5):
     """
     Purpose:
         Plots protocol vs time in latex form
@@ -90,7 +92,7 @@ def protocol(time_slice,protocol_array,title=None,out_file=None,labels=None,show
     else:
         for i,p in zip(range(n_curve),protocols):
             ext_p=np.hstack((p,p[-1]))
-            plt.step(ext_ts,ext_p,'-',clip_on=False,c='black',where='post',zorder=0,lw=5)
+            plt.step(ext_ts,ext_p,'-',clip_on=False,c='black',where='post',zorder=0,lw=lw)
             #plt.scatter(time_slice,p,clip_on=False,c='black',marker='o',s=8,edgecolor='black',linewidths=0.5,zorder=1)
             #plt.plot(time_slice,p,clip_on=False,c=palette[i])
         
