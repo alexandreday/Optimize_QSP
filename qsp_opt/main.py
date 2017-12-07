@@ -203,6 +203,7 @@ def SA(param, model:MODEL):
     return best_fid, best_protocol, n_quench
 
 def run_SD(parameters, model:MODEL, utils, save = True):
+
     from .SD import SD
 
     outfile = utils.make_file_name(parameters,root=parameters['root'])
@@ -367,12 +368,6 @@ def run_ES(parameters, model:MODEL, utils):
     print("Total run time : \t %.3f s"%(time.time()-st))
     print("\n Thank you and goodbye !")
     f.close()
-
-
-def SD_1SF(param, model, initial_protocol = None):
-    ### --- follow up
-    # ...
-    return 0
 
 def symmetrize_protocol(hx_protocol):
     Nstep=len(hx_protocol)

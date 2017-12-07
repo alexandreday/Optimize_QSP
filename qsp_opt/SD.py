@@ -34,16 +34,14 @@ class SD:
 
     def run_with_fid_series(self):
         model = self.model
-        fid_series = []
         old_fid = model.compute_fidelity()
-        print(old_fid)
         fid_series = [old_fid]
         n_fid_eval = 1
         n_visit = 1
         local_minima_reached = False
 
         while not local_minima_reached:
-    
+
             np.random.shuffle(self.order)
 
             for move in self.order:
@@ -53,21 +51,21 @@ class SD:
                 n_fid_eval +=1
                 if new_fid > old_fid:
                     old_fid = new_fid
+                    fid_series.append(old_fid)
                     n_visit += 1
-                    fid.series.append(old_fid)
                     break
+                else:
+                    model.flip_hx(idx_flip) # reject move
+
                 if move == self.order[-1]: # meaning it went through the whole sequence !
                     local_minima_reached = True
-                else:
-                    model.flip_hx(idx_flip)
-
+      
         return old_fid, np.copy(model.protocol()), n_fid_eval, n_visit, fid_series
 
     def run_wo_fid_series(self):
         
         model = self.model
         old_fid = model.compute_fidelity()
-        print(" --------->", old_fid)
         n_fid_eval = 1
         n_visit = 1
         local_minima_reached = False
@@ -85,9 +83,10 @@ class SD:
                     old_fid = new_fid
                     n_visit += 1
                     break
-                if move == self.order[-1]: # meaning it went through the whole sequence !
-                    local_minima_reached = True
                 else:
                     model.flip_hx(idx_flip) # reject move
-        print(" final fid: ", old_fid) # issue here !
+
+                if move == self.order[-1]: # meaning it went through the whole sequence !
+                    local_minima_reached = True
+      
         return old_fid, np.copy(model.protocol()), n_fid_eval, n_visit, [-1]
