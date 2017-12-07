@@ -1,11 +1,23 @@
 '''
-Created on Sep 1 , 2016
+Created on Sep 1 , 2017
 
 @author: Alexandre Day
 '''
 from quspin.operators import hamiltonian
 from quspin.basis import spin_basis_1d
 import numpy as np
+
+########################################
+""" --------- IMPORTANT:
+Note that the hamiltonian defined here takes the form:
+H=-J*s_i^zs_(i+1)^z-hz*s_i^z-hx*s_i^x, where i,j are summed over (i=1,2,3,4,... L)
+# -> For L = 1, the first term is removed !
+(Take note of the signs used !)
+""" 
+########################################
+#######################################
+
+
 
 class HAMILTONIAN:
 	# Time dependent Hamiltonian class
@@ -46,13 +58,24 @@ class HAMILTONIAN:
 	def ground_state(self, hx = 0.):
 		return self.hamiltonian_cont.eigsh(time=hx, k=1, which='SA')[1]
 
+	def eigenvalue(self, hx = 0.):
+		""" Returns the spectrum of the Hamiltonian for a specific value of the transverse field """
+		return self.hamiltonian_cont.eigvalsh(time=hx)
+
 	def eigen_basis(self, hx = 0.):
+		""" Returns the eigenbasis of the Hamiltonian for a specific value of the transverse field """
 		return self.hamiltonian_cont.eigh(time=hx)
 
 	def compute_h_set(self, hmin, hmax, dh):
+		""" Computes the different values of hx given the maximum and minimum values specified by the user """
 		return np.arange(hmin, hmax+1e-6, dh)
 
 	def update_hx(self, time=0, hx = None, hx_idx = None):
+		""" Updates the protocol hx(t) at time t. The new value is hx.
+		One can either specify a scalar value for the hx field. Another option
+		is to use the integer index for the field. Since we are hx can take only
+		a discrete set of values between hmin and hmax, those values can are also indexed by integers
+		"""
 		if hx_idx is not None:
 			self.hx_discrete[time]=hx_idx
 		elif hx is not None:
@@ -62,4 +85,5 @@ class HAMILTONIAN:
 			assert False, "Error in update_hx in Hamiltonian class"
 
 	def evaluate_H_at_hx(self, hx = 0.):
+		""" Returns the full hamiltonian evaluated at global transverse field hx """
 		return self.hamiltonian_cont(time = hx)

@@ -47,7 +47,8 @@ class UTILS:
 		'verbose' : int,
 		'task' : str,
 		'root' : str,
-		'fid_series': bool
+		'fid_series': bool,
+		'n_flip':int
 	}
 
 	def read_command_line_arg(self,parameters,argv):
@@ -114,6 +115,7 @@ class UTILS:
 			verbose: If you want the program to print to screen the progress
 			symmetrize_protocol: Wether or not to work in the symmetrized sector of protocols
 			
+			n_flip : number of spin flips in the SD algorithm (only applicable there)
 			hx_max : maximum hx field (the annealer can go between -hx_max and hx_max
 			FIX_NUMBER_FID_EVAL: decide wether you want to fix the maximum number of fidelity evaluations (deprecated)
 			RL_CONSTRAINT: use reinforcement learning constraints or not
@@ -121,7 +123,7 @@ class UTILS:
 		"""
 
 		L, dt, J, n_step, hz, hx_max = tuple([parameters[s] for s in ['L','dt', 'J', 'n_step','hz','hx_max']])
-		hx_initial_state, hx_final_state, n_quench, n_sample, n_step = tuple([parameters[s] for s in ['hx_i','hx_f','n_quench','n_sample','n_step']])
+		hx_initial_state, hx_final_state, n_quench, n_sample, n_step, n_flip = tuple([parameters[s] for s in ['hx_i','hx_f','n_quench','n_sample','n_step','n_flip']])
 		symmetrize,outfile = tuple([parameters[s] for s in ['symmetrize','outfile']])
 
 		print("-------------------- > Parameters < --------------------")
@@ -136,6 +138,7 @@ class UTILS:
 		print("{0:<30s}{1:<5.4f}".format('dt',dt))
 		print("{0:<30s}{1:<5d}".format('n_sample',n_sample))
 		print("{0:<30s}{1:<5d}".format('n_step',n_step))
+		print("{0:<30s}{1:<5d}".format('n_flip',n_flip))
 		
 		print("{0:<30s}{1:<5.2f}".format('T',n_step*dt))
 		print("{0:<30s}{1:<5s}".format('Task',parameters['task']))
@@ -192,7 +195,10 @@ class UTILS:
 			elif tmp[0] == 'int':
 				param_value[i]=i_to_str(parameters[param_name],prec=int(tmp[1]))
 			elif tmp[0] == 'str':
-				param_value[i]=parameters[param_name]
+				if param_name == 'task':
+					param_value[i] = parameters[param_name]+str(parameters['n_flip'])
+				else:
+					param_value[i]=parameters[param_name]
 			else:
 				print(tmp)
 				assert False,"Wrong cast-type format"

@@ -17,6 +17,7 @@ class MODEL:
         # calculate initial and final states wave functions (ground-state)
         self.psi_i = H.ground_state(hx=param['hx_i'])
         self.psi_target = H.ground_state(hx=param['hx_f'])
+
         self.H_target = H.evaluate_H_at_hx(hx=self.param['hx_f']).todense()
         
         print("{0:<30s}{1:<5.5f}".format("Initial overlap is",overlap(self.psi_i, self.psi_target)[0][0]))
@@ -61,7 +62,7 @@ class MODEL:
         if protocol is None:
             protocol = self.H.hx_discrete
         psi_evolve=self.psi_i.copy()
-        
+    
         for idx in protocol:
             psi_evolve = self.precompute_mat[idx].dot(psi_evolve)
         return psi_evolve
@@ -94,6 +95,12 @@ class MODEL:
     def update_hx(self, time:int, hx_idx:int):
         """ Update protocol at a specific time """
         self.H.hx_discrete[time]=hx_idx
+
+    def flip_hx(self, hx_idx):
+        """ Flips protocol at postions hx_idx, where hx_idx is specified as a list or integer 
+            This works only when n_h_field == 2 (binary)
+        """
+        self.H.hx_discrete[hx_idx]^=1
 
     def protocol(self):
         """ Returns current protocol """
