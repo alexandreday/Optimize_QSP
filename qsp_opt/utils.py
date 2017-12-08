@@ -58,7 +58,10 @@ class UTILS:
 				if i > 0:
 					arg_split=arg.split('=')
 					# if arg is not specified properly this will trigger a dictionnary key error <--
-					parameters[arg_split[0]] = self.param_type[arg_split[0]](arg_split[1])
+					if self.param_type[arg_split[0]] == int:
+						parameters[arg_split[0]] = self.param_type[arg_split[0]](float(arg_split[1]))
+					else:
+						parameters[arg_split[0]] = self.param_type[arg_split[0]](arg_split[1])
 			
 		if parameters['dt'] < 0. : # time slices should be automatically computed 
 			parameters['dt'] = parameters['T']/parameters['n_step']
