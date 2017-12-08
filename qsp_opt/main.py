@@ -212,6 +212,9 @@ def run_SD(parameters, model:MODEL, utils, save = True):
 
     if n_exist_sample >= n_sample :
         print("Samples already computed in file --> terminating...")
+        all_fids = [f[1] for f in all_result]
+        print("Mean fidelity over samples :\t %.14f"%np.mean(all_fids))
+        print("Std. fidelity over samples :\t %.14f"%np.std(all_fids))
         print("Goodbye !")
         return all_result
     elif n_exist_sample == 0:
@@ -253,11 +256,18 @@ def run_SD(parameters, model:MODEL, utils, save = True):
     print("\n Thank you and goodbye !")
     enablePrint()
 
+    #np.mean(
+
     if save : # final saving !
         with open(outfile,'wb') as f:
             pickle.dump([parameters, all_result],f)
             print("Saved results in %s"%outfile)
             f.close()
+
+    all_fids = [f[1] for f in all_result]
+    print("Mean fidelity over samples :\t %.8f"%np.mean(all_fids))
+    print("Std. fidelity over samples :\t %.8f"%np.std(all_fids))
+
     return all_result    
 
 def Gibbs_Sampling(param, model:MODEL): 
