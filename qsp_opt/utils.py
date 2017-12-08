@@ -80,7 +80,8 @@ class UTILS:
 				if len(tmp) == 1:
 					tmp = tmp[0].split(' ')
 				assert len(tmp) == 2, 'Wrong format for input file, need to have a space or tab separating parameter and its value'
-				info[tmp[0]]=tmp[1]
+				info[tmp[0]] = tmp[1]
+
 		param = {}
 		for p in self.param_type.keys(): # cast strings to floats and ints !
 			if self.param_type[p] == bool:
@@ -90,8 +91,11 @@ class UTILS:
 					param[p] = False
 				else:
 					assert False, 'Wrong boolean format'
+			elif self.param_type[p] == int:
+				param[p] = int(float(info[p])) # first cast to float then to int, some weird python bug ...
 			else:
 				param[p] = self.param_type[p](info[p])
+
 		return param
 
 	def print_parameters(self, parameters):
