@@ -14,6 +14,8 @@ class MODEL:
         self.H = H  # shallow copy 
         self.param = param
 
+        self.bitarray_to_b10 = lambda protocol : int("".join(list(np.array(protocol,dtype=str))),2)
+
         # calculate initial and final states wave functions (ground-state)
         self.psi_i = H.ground_state(hx=param['hx_i'])
         self.psi_target = H.ground_state(hx=param['hx_f'])
@@ -30,6 +32,12 @@ class MODEL:
         print("Precomputing evolution matrices ...",end='')
         start=time.time()
         self.precompute_expmatrix()
+
+        self.split_protocol = self.param['fast_protocol']
+        if self.param['fast_protocol'] is True:
+            assert self.param['n_step'] % 10 == 0, "n_step needs to be a multiple of 10 !"
+            self.precompute_split_protocol(self, n=10)
+
         print(" Done in %.4f seconds"%(time.time()-start))
 
     def precompute_expmatrix(self):
@@ -43,28 +51,43 @@ class MODEL:
         
         self.param['V_target'] = self.H.eigen_basis(hx=self.param['hx_f'])
     
-    ''' def precomute_joined_expmatrix(self, length = 10):
+    def precompute_split_protocol(self, n=10):
+        self.split_size = n
+        dim1, dim2 = self.precompute_mat[0].shape
+        
+        # only works for binary fields
         h_set = self.H.h_set
-        base = len(h_set)
-        n_config = base**length
-        self.precompute_joined = {}
+        def b2_to_array(n10, n=10):
+            str_rep = np.binary_repr(n10, width=n)
+            return np.array(list(str_rep),dtype=np.int)
 
-        for i in n_config:# -----
-            self.precompute_joined[i] = #
+        self.precompute_protocol = np.empty((2**n,dim1,dim2), dtype=float) # array of arrays
 
+        for i in range(2**n):
+            partial_protocol = b2_array(i, n=n)
 
-        for idx, h in zip(range(len(h_set)),h_set):
-            self.precompute_mat[idx] = expm(-1j*self.param['dt']*self.H.evaluate_H_at_hx(hx=h).todense())
-     '''    
-
+            ### COMPUTING PRODUCT ###
+            init_matrix = np.copy(self.precompute_mat[partial_protocol[0]])
+            for idx in partial_protocol[1:]:
+                init_matrix = init_matrix.dot(self.precompute_mat[idx])
+            #########################
+            self.precompute_protocol[i] = init_matrix # all info stored here 
+        
     def compute_evolved_state(self, protocol=None): 
         """ Compute the evolved state after applying protocol """
         if protocol is None:
             protocol = self.H.hx_discrete
         psi_evolve=self.psi_i.copy()
     
-        for idx in protocol:
-            psi_evolve = self.precompute_mat[idx].dot(psi_evolve)
+        if self.precompute_split is True:
+            n_partition = len(protocol) // self.split_size
+            for i in n_partition:
+                idx = self.bitarray_to_b10(protocol[i*self.split_size:(i+1)*self.split_size])
+                psi_evolve = self.precompute_protocol[idx].dot(psi_evolve)
+        else:
+            for idx in protocol:
+                psi_evolve = self.precompute_mat[idx].dot(psi_evolve)
+
         return psi_evolve
     
     def compute_continuous_fidelity(self, continuous_protocol):
