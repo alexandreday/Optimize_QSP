@@ -34,9 +34,10 @@ class MODEL:
         self.precompute_expmatrix()
 
         self.split_protocol = self.param['fast_protocol']
+        self.n_partition = self.param['n_partition']
         if self.param['fast_protocol'] is True:
-            assert self.param['n_step'] % 10 == 0, "n_step needs to be a multiple of 10 !"
-            self.precompute_split_protocol(n=10)
+            assert self.param['n_step'] % self.n_partition == 0, "n_step needs to be a multiple of %i !"% self.n_partition
+            self.precompute_split_protocol(n=self.n_partition)
 
         print(" Done in %.4f seconds"%(time.time()-start))
 

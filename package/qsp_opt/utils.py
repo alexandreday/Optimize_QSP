@@ -49,7 +49,8 @@ class UTILS:
 		'fast_protocol': bool,
 		'root' : str,
 		'fid_series': bool,
-		'n_flip':int
+		'n_flip':int,
+		'n_partition':int
 	}
 
 	def read_command_line_arg(self, parameters, argv):
@@ -127,7 +128,8 @@ class UTILS:
 			hx_max : maximum hx field (the annealer can go between -hx_max and hx_max
 			FIX_NUMBER_FID_EVAL: decide wether you want to fix the maximum number of fidelity evaluations (deprecated)
 			RL_CONSTRAINT: use reinforcement learning constraints or not
-			fidelity_fast: prepcompute exponential matrices and runs fast_Fidelity() instead of Fidelity()
+			fast_protocol: prepcompute exponential matrices and runs fast_Fidelity() instead of Fidelity()
+			n_partition : if fast_protocol is set to True, then will compute 2**(n_step/n_partition) evolution matrices
 		"""
 
 		L, dt, J, n_step, hz, hx_max = tuple([parameters[s] for s in ['L','dt', 'J', 'n_step','hz','hx_max']])
