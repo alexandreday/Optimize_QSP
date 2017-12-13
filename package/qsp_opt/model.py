@@ -29,14 +29,14 @@ class MODEL:
         self.precompute_mat = {} # precomputed evolution matrices are indexed by integers 
     
         print("\n-----------------> Setting up computation <---------------------")
-        print("Precomputing evolution matrices ...",end='')
+        print("Precomputing evolution matrices ...",end='\n')
         start=time.time()
         self.precompute_expmatrix()
 
         self.split_protocol = self.param['fast_protocol']
         if self.param['fast_protocol'] is True:
             assert self.param['n_step'] % 10 == 0, "n_step needs to be a multiple of 10 !"
-            self.precompute_split_protocol(self, n=10)
+            self.precompute_split_protocol(n=10)
 
         print(" Done in %.4f seconds"%(time.time()-start))
 
@@ -51,25 +51,37 @@ class MODEL:
         
         self.param['V_target'] = self.H.eigen_basis(hx=self.param['hx_f'])
     
+    def prot_to_b10(self, array, i1, i2):
+        """ Fastest way I found to compute this ! """ 
+        value = 0
+        p = 1
+        for b in reversed(array[i1:i2]):
+            value = value + b*p
+            p*=2
+        return value
+
     def precompute_split_protocol(self, n=10):
-        self.split_size = n
-        dim1, dim2 = self.precompute_mat[0].shape
-        
+
+        lin_dim, _ = self.precompute_mat[0].shape
+        print("Memory used for storing matrices : %.3f MB"%((lin_dim*lin_dim*16*2.*2.**n)/(10**6.)))
+
+
+        self.split_size = n        
         # only works for binary fields
         h_set = self.H.h_set
         def b2_to_array(n10, n=10):
             str_rep = np.binary_repr(n10, width=n)
             return np.array(list(str_rep),dtype=np.int)
 
-        self.precompute_protocol = np.empty((2**n,dim1,dim2), dtype=float) # array of arrays
+        self.precompute_protocol = {}
 
         for i in range(2**n):
-            partial_protocol = b2_array(i, n=n)
-
+            partial_protocol = b2_to_array(i, n=n)
+        
             ### COMPUTING PRODUCT ###
             init_matrix = np.copy(self.precompute_mat[partial_protocol[0]])
             for idx in partial_protocol[1:]:
-                init_matrix = init_matrix.dot(self.precompute_mat[idx])
+                init_matrix = self.precompute_mat[idx].dot(init_matrix)
             #########################
             self.precompute_protocol[i] = init_matrix # all info stored here 
         
@@ -79,11 +91,15 @@ class MODEL:
             protocol = self.H.hx_discrete
         psi_evolve=self.psi_i.copy()
     
-        if self.precompute_split is True:
+        if self.split_protocol is True:
             n_partition = len(protocol) // self.split_size
-            for i in n_partition:
-                idx = self.bitarray_to_b10(protocol[i*self.split_size:(i+1)*self.split_size])
+
+            pos_i = 0
+            for i in range(n_partition):
+                idx = self.prot_to_b10(protocol, pos_i, pos_i+self.split_size)
+                pos_i+=self.split_size
                 psi_evolve = self.precompute_protocol[idx].dot(psi_evolve)
+                #psi_evolve = self.precompute_protocol[i].dot(psi_evolve) 
         else:
             for idx in protocol:
                 psi_evolve = self.precompute_mat[idx].dot(psi_evolve)

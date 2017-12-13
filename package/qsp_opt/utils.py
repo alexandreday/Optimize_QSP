@@ -46,12 +46,13 @@ class UTILS:
 		'outfile' : str,
 		'verbose' : int,
 		'task' : str,
+		'fast_protocol': bool,
 		'root' : str,
 		'fid_series': bool,
 		'n_flip':int
 	}
 
-	def read_command_line_arg(self,parameters,argv):
+	def read_command_line_arg(self, parameters, argv):
 		n_elem = len(argv)
 		if n_elem > 1:
 			for i, arg in zip(range(n_elem),argv):
@@ -152,6 +153,7 @@ class UTILS:
 		print("{0:<30s}{1:<5s}".format("Output file",'data/'+outfile))
 		print("{0:<30s}{1:<5s}".format("Symmetrizing protocols",str(symmetrize)))
 		print("{0:<30s}{1:<5s}".format("Compute fid series ?",str(parameters['fid_series'])))
+		print("{0:<30s}{1:<5s}".format("Fast computation ?",str(parameters['fast_protocol'])))
 		
 
 	def make_file_name(self, parameters, extension = ".pkl", root=""):
@@ -187,6 +189,7 @@ class UTILS:
 						['hx_max','float-2'],
 						['hx_min','float-2'],
 						['dh','float-2']
+					
 		]
 		if parameters['dt'] < 0:
 			parameters['dt'] = parameters['T']/parameters['n_step']
