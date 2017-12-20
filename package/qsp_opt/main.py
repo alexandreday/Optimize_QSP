@@ -366,9 +366,9 @@ def run_ES(parameters, model:MODEL, utils):
 
     st=time.time()
     for p in range(n_protocol):
-        model.update_protocol(b2_array(p))
+        model.update_protocol(b2_array(p))git config user.email
         psi = model.compute_evolved_state()
-        exact_data[p] = (model.compute_fidelity(psi_evolve=psi), model.compute_energy(psi_evolve=psi))#, model.compute_Sent(psi_evolve=psi))
+        exact_data[p] = (model.compute_fidelity(psi_evolve=psi), model.compute_energy(psi_evolve=psi)) #, model.compute_Sent(psi_evolve=psi))
     
     outfile = utils.make_file_name(parameters, root=parameters['root'])
     with open(outfile,'wb') as f:
