@@ -60,7 +60,7 @@ class MODEL:
             value = value + b*p
             p*=2
         return value
-
+        
     def precompute_split_protocol(self, n=10):
 
         lin_dim, _ = self.precompute_mat[0].shape

@@ -207,7 +207,7 @@ class UTILS:
 			elif tmp[0] == 'int':
 				param_value[i]=i_to_str(parameters[param_name],prec=int(tmp[1]))
 			elif tmp[0] == 'str':
-				if param_name == 'task':
+				if param_name == 'task' and parameters['task'] == 'SD' :
 					param_value[i] = parameters[param_name]+str(parameters['n_flip'])
 				else:
 					param_value[i]=parameters[param_name]

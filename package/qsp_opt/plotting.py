@@ -61,7 +61,7 @@ def density_map(X, kde, savefile='test.png', show=True, xlabel=None, ylabel=None
     #plt.show()
 
 
-def protocol(time_slice,protocol_array,title=None,out_file=None,labels=None,show=True,ylabel='$h_x(t)$',xlabel="$t$",lw=5):
+def protocol(protocol,T=None,title=None,out_file=None,label=None,show=True,ylabel='$h_x(t)$',xlabel="$t$",lw=5):
     """
     Purpose:
         Plots protocol vs time in latex form
@@ -71,30 +71,31 @@ def protocol(time_slice,protocol_array,title=None,out_file=None,labels=None,show
     plt.rc('font', **font)
 
     palette=[plt.get_cmap('Dark2')(0),plt.get_cmap('Dark2')(10),plt.get_cmap('Dark2')(20)]
-    protocols=adjust_format(protocol_array)
 
     # fig size
     plt.figure(figsize=(8,4))
-    
-    n_curve=len(protocols)
+    #n_curve=len(protocols)
 
     #palette = np.array(sns.color_palette('hls',n_curve))
     fontsize=15
+    n_step = len(protocol)
+    if T is not None:
+        time_slice = np.linspace(0,T+0.00001,n_step)
+    else:
+        time_slice = np.arange(0,n_step)
+
     ext_ts=np.hstack((time_slice,time_slice[-1]+time_slice[1]-time_slice[0]))
     
-    if labels is not None:
-        for i,p in zip(range(n_curve),protocols):
-            ext_p=np.hstack((p,p[-1]))
-            plt.step(ext_ts,ext_p,'-',clip_on=False,c=palette[i],label=labels[i],where='post')
-            plt.plot(time_slice,p,'o',clip_on=False,c=palette[i])
-        plt.legend(loc='best', shadow=True,fontsize=fontsize)
+    if label is not None:
+        ext_p=np.hstack((protocol,protocol[-1]))
+        plt.step(ext_ts,ext_p,'-',clip_on=False,c=palette[0],label=label,where='post')
+        plt.plot(time_slice,protocol,'o',clip_on=False,c=palette[0])
+        plt.legend(loc='best', shadow=True, fontsize=fontsize)
         
     else:
-        for i,p in zip(range(n_curve),protocols):
-            ext_p=np.hstack((p,p[-1]))
-            plt.step(ext_ts,ext_p,'-',clip_on=False,c='black',where='post',zorder=0,lw=lw)
-            #plt.scatter(time_slice,p,clip_on=False,c='black',marker='o',s=8,edgecolor='black',linewidths=0.5,zorder=1)
-            #plt.plot(time_slice,p,clip_on=False,c=palette[i])
+        ext_p=np.hstack((protocol,protocol[-1]))
+        plt.step(ext_ts,ext_p,'-',clip_on=False,c=palette[0],where='post')
+        plt.plot(time_slice,protocol,'o',clip_on=False,c=palette[0])
         
     if title is not None:
         plt.title(title,fontsize=fontsize)
