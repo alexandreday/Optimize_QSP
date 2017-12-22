@@ -47,8 +47,8 @@ class MODEL:
         # set of possible -> fields 
         h_set = self.H.h_set
 
-        for idx, h in zip(range(len(h_set)),h_set):
-            self.precompute_mat[idx] = expm(-1j*self.param['dt']*self.H.evaluate_H_at_hx(hx=h).todense())
+        for idx, h in zip(range(len(h_set)), h_set):
+            self.precompute_mat[idx] = expm(-1j*self.param['dt'] * np.asarray(self.H.evaluate_H_at_hx(hx=h).todense()))
         
         self.param['V_target'] = self.H.eigen_basis(hx=self.param['hx_f'])
     
