@@ -63,6 +63,8 @@ class QSP:
         elif parameters['task'] == 'SASD':
             print("Simulating annealing followed by stochastic descent")
             run_SA(parameters, model, utils)
+        elif parameters['task'] == 'FO':
+            run_FO(parameters, model, utils)
         else:
             print("Wrong task option used")
     
@@ -348,10 +350,16 @@ def compute_initial_Ti(param, model:MODEL, n_sample = 100, rate = 0.8):
     return np.mean(dF_mean)/ np.log(rate)
 
 def run_ES(parameters, model:MODEL, utils):
+    """
+        Evaluate fidelity for a protocol of n_step in length, and stores the corresponding
+        fidelities in a file. Also computes the energy (expectation value of the final Hamiltonian) of those protocols.
+    """
     
     n_step = parameters['n_step']
+
     n_protocol = 2**n_step
-    exact_data = np.zeros((n_protocol,3), dtype=np.float64) # 15 digits precision
+    #exact_data = np.zeros((n_protocol,2), dtype=np.float64) # 15 digits precision, with Sent
+    exact_data = np.zeros((n_protocol,2), dtype=np.float64) # 15 digits precision
 
     b2_array = lambda n10 : np.array(list(np.binary_repr(n10, width=n_step)), dtype=np.int)
     st=time.time()
@@ -359,7 +367,7 @@ def run_ES(parameters, model:MODEL, utils):
     model.update_protocol(b2_array(0))
     psi = model.compute_evolved_state()
     model.compute_fidelity(psi_evolve=psi)
-    model.compute_Sent(psi_evolve=psi)
+    #model.compute_Sent(psi_evolve=psi)
     model.compute_energy(psi_evolve=psi)
     print("Est. run time : \t %.3f s"%(0.5* n_protocol*(time.time()-st)))
     # ---> Starting real calculation <---
@@ -378,6 +386,50 @@ def run_ES(parameters, model:MODEL, utils):
     print("Total run time : \t %.3f s"%(time.time()-st))
     print("\n Thank you and goodbye !")
     f.close()
+
+def run_FO(parameters, model:MODEL, utils):
+    """ Finds the Optimal protocol and it's fidelity """
+    
+    n_step = parameters['n_step']
+    n_protocol = 2**n_step
+    #exact_data = np.zeros((n_protocol,2), dtype=np.float64) # 15 digits precision, with Sent
+    #exact_data = np.zeros((n_protocol,2), dtype=np.float64) # 15 digits precision
+
+    b2_array = lambda n10 : np.array(list(np.binary_repr(n10, width=n_step)), dtype=np.int)
+    st=time.time()
+    # ---> measuring estimated time <---
+    model.update_protocol(b2_array(0))
+    psi = model.compute_evolved_state()
+    model.compute_fidelity(psi_evolve=psi)
+    print("Est. run time : \t %.3f s"%(0.5* n_protocol*(time.time()-st)))
+    # ---> Starting real calculation <---
+    
+    best_fid = -1
+
+    st=time.time()
+    for p in range(n_protocol):
+
+        model.update_protocol(b2_array(p))
+        psi = model.compute_evolved_state()
+        p_fid = model.compute_fidelity(psi_evolve=psi)
+        if p_fid > best_fid:
+            #print(p,'\t',"%.15f"%p_fid)
+            best_fid = p_fid
+            best_protocol = b2_array(p)
+
+    outfile = utils.make_file_name(parameters, root=parameters['root'])
+    with open(outfile,'wb') as f:
+        pickle.dump([best_fid, best_protocol], f, protocol=4)
+
+    print("Saved results in %s"%outfile)
+    print("Total run time : \t %.3f s"%(time.time()-st))
+    print("\n Thank you and goodbye !")
+    f.close()
+
+
+
+
+
 
 def symmetrize_protocol(hx_protocol):
     Nstep=len(hx_protocol)
