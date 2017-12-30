@@ -50,7 +50,8 @@ class UTILS:
 		'root' : str,
 		'fid_series': bool,
 		'n_flip':int,
-		'n_partition':int
+		'n_partition':int,
+		'compress_output':str
 	}
 
 	def read_command_line_arg(self, parameters, argv):

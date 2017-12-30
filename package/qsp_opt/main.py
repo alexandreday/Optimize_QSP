@@ -239,7 +239,9 @@ def run_SD(parameters, model:MODEL, utils, save = True):
 
         energy = model.compute_energy(protocol = best_protocol)
         result = [n_fid_eval, best_fid, energy, n_visit, best_protocol, fid_series] # -------> THIS IS WHAT WILL BE STORED IN THE PICKLE FILE 
-
+        if parameters['compress_output'] == 'wo_protocol':
+            result = [n_fid_eval, best_fid, energy, n_visit, [-1], fid_series]
+            
         print("\n----------> RESULT FOR STOCHASTIC DESCENT NO %i <-------------"%(it+1))
         print("Number of fidelity eval \t%i"%n_fid_eval)
         print("Number of states visited \t%i"%n_visit)
