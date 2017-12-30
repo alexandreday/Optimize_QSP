@@ -272,7 +272,7 @@ def run_SD(parameters, model:MODEL, utils, save = True):
     print("Mean fidelity over samples :\t %.8f"%np.mean(all_fids))
     print("Std. fidelity over samples :\t %.8f"%np.std(all_fids))
     if parameters['compress_output'] != 'wo_protocol':
-        all_procotocol = [f[4] for f in all_result]
+        all_proctocol = [f[4] for f in all_result]
         print("# of distinct protocols :\t %i"%len(np.unique(all_protocol, axis=0)))
 
     return all_result    
