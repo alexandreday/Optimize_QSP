@@ -241,7 +241,7 @@ def run_SD(parameters, model:MODEL, utils, save = True):
         result = [n_fid_eval, best_fid, energy, n_visit, best_protocol, fid_series] # -------> THIS IS WHAT WILL BE STORED IN THE PICKLE FILE 
         if parameters['compress_output'] == 'wo_protocol':
             result = [n_fid_eval, best_fid, energy, n_visit, [-1], fid_series]
-            
+
         print("\n----------> RESULT FOR STOCHASTIC DESCENT NO %i <-------------"%(it+1))
         print("Number of fidelity eval \t%i"%n_fid_eval)
         print("Number of states visited \t%i"%n_visit)
@@ -271,6 +271,9 @@ def run_SD(parameters, model:MODEL, utils, save = True):
     all_fids = [f[1] for f in all_result]
     print("Mean fidelity over samples :\t %.8f"%np.mean(all_fids))
     print("Std. fidelity over samples :\t %.8f"%np.std(all_fids))
+    if parameters['compress_output'] != 'wo_protocol':
+        all_procotocol = [f[4] for f in all_result]
+        print("# of distinct protocols :\t %i"%len(np.unique(all_protocol, axis=0)))
 
     return all_result    
 
