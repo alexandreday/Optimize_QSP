@@ -37,7 +37,7 @@ class MODEL:
         self.n_partition = self.param['n_partition']
         if self.param['fast_protocol'] is True:
             assert self.param['n_step'] % self.n_partition == 0, "n_step needs to be a multiple of %i !"% self.n_partition
-            self.precompute_split_protocol(n=self.n_partition)
+            self.precompute_split_protocol(n_partition=self.n_partition)
 
         print(" Done in %.4f seconds"%(time.time()-start))
 
@@ -65,7 +65,7 @@ class MODEL:
         # n should be the number of partitions wanted !!
         lin_dim, _ = self.precompute_mat[0].shape
         n_step = self.param['n_step']
-        n_step_per_partition = n_step/n_partition
+        n_step_per_partition = n_step//n_partition
         print("Memory used for storing matrices : %.3f MB"%((lin_dim*lin_dim*16*2.*2.**n_step_per_partition)/(10**6.)))
 
         self.split_size = n_step_per_partition     
