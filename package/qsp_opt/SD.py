@@ -16,7 +16,7 @@ class SD:
             for s in range(1, nflip):
                 for e in combinations(idx,s+1):
                     self.flip_list.append(list(e))
-        self.n_move = len(self.flip_list) 
+        self.n_move = len(self.flip_list)
         self.order = np.arange(0, self.n_move, dtype=int)
         self.fid_series = param['fid_series']
         self.init_random=init_random

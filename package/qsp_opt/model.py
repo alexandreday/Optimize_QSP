@@ -61,13 +61,14 @@ class MODEL:
             p*=2
         return value
         
-    def precompute_split_protocol(self, n=10):
-
+    def precompute_split_protocol(self, n_partition=2):
+        # n should be the number of partitions wanted !!
         lin_dim, _ = self.precompute_mat[0].shape
-        print("Memory used for storing matrices : %.3f MB"%((lin_dim*lin_dim*16*2.*2.**n)/(10**6.)))
+        n_step = self.param['n_step']
+        n_step_per_partition = n_step/n_partition
+        print("Memory used for storing matrices : %.3f MB"%((lin_dim*lin_dim*16*2.*2.**n_step_per_partition)/(10**6.)))
 
-
-        self.split_size = n        
+        self.split_size = n_step_per_partition     
         # only works for binary fields
         h_set = self.H.h_set
         def b2_to_array(n10, n=10):
@@ -76,8 +77,8 @@ class MODEL:
 
         self.precompute_protocol = {}
 
-        for i in range(2**n):
-            partial_protocol = b2_to_array(i, n=n)
+        for i in range(2**n_step_per_partition):
+            partial_protocol = b2_to_array(i, n=n_step_per_partition)
         
             ### COMPUTING PRODUCT ###
             init_matrix = np.copy(self.precompute_mat[partial_protocol[0]])
