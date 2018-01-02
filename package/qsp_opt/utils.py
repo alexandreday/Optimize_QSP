@@ -51,7 +51,10 @@ class UTILS:
 		'fid_series': bool,
 		'n_flip':int,
 		'n_partition':int,
-		'compress_output':str
+		'compress_output':str,
+		'para_evaluation':int,
+		'para_n_slice':int,
+		'para_this_slice':int
 	}
 
 	def read_command_line_arg(self, parameters, argv):
@@ -209,7 +212,9 @@ class UTILS:
 				param_value[i]=i_to_str(parameters[param_name],prec=int(tmp[1]))
 			elif tmp[0] == 'str':
 				if param_name == 'task' and parameters['task'] == 'SD' :
-					param_value[i] = parameters[param_name]+str(parameters['n_flip'])
+					param_value[i] = parameters[param_name] + str(parameters['n_flip'])
+				elif param_name == 'task' and parameters['para_evaluation'] == 1:
+					param_value[i] = parameters[param_name] + str(parameters['para_this_slice'])
 				else:
 					param_value[i]=parameters[param_name]
 			else:

@@ -406,25 +406,54 @@ def run_FO(parameters, model:MODEL, utils):
     model.update_protocol(b2_array(0))
     psi = model.compute_evolved_state()
     model.compute_fidelity(psi_evolve=psi)
-    print("Est. run time : \t %.3f s"%(0.5* n_protocol*(time.time()-st)))
+    if parameters['para_evaluation'] == 1:
+        para_n_slice = parameters['para_n_slice']
+    else:
+        para_n_slice = 1
+    
+    print("Est. run time : \t %.3f s"%((1./para_n_slice)*0.5* n_protocol*(time.time()-st)))
     # ---> Starting real calculation <---
     
     best_fid = -1
-
     st=time.time()
-    for p in range(n_protocol):
 
-        model.update_protocol(b2_array(p))
-        psi = model.compute_evolved_state()
-        p_fid = model.compute_fidelity(psi_evolve=psi)
-        if p_fid > best_fid:
-            #print(p,'\t',"%.15f"%p_fid)
-            best_fid = p_fid
-            best_protocol = b2_array(p)
+    if parameters['para_evaluation'] == 0:
+        for p in range(n_protocol):
+
+            model.update_protocol(b2_array(p))
+            psi = model.compute_evolved_state()
+            p_fid = model.compute_fidelity(psi_evolve=psi)
+            if p_fid > best_fid:
+                #print(p,'\t',"%.15f"%p_fid)
+                best_fid = p_fid
+                best_protocol = b2_array(p)
+    elif parameters['para_evaluation'] == 1: # do you want to do parallel evaluation of the protocols
+        para_n_slice = parameters['para_n_slice'] # number of slices
+        para_this_slice = parameters['para_this_slice'] # this slice number
+        assert para_this_slice < para_n_slice, "para_this_slice should be in range(0,para_n_slice)"
+        n_prot_per_slice = n_protocol // para_n_slice
+
+        i = para_this_slice
+        dp = n_prot_per_slice
+
+        for p in range(i*dp,(i+1)*dp):
+            if p > n_protocol-1:
+                break
+            model.update_protocol(b2_array(p))
+            psi = model.compute_evolved_state()
+            p_fid = model.compute_fidelity(psi_evolve=psi)
+            if p_fid > best_fid:
+                #print(p,'\t',"%.15f"%p_fid)
+                best_fid = p_fid
+                best_protocol = b2_array(p)
+    else:
+        assert False, "Wrong para.dat input"
 
     outfile = utils.make_file_name(parameters, root=parameters['root'])
     with open(outfile,'wb') as f:
         pickle.dump([best_fid, best_protocol], f, protocol=4)
+        
+        #for p in range(n_protocol//n_parallel_partition) 
 
     print("Saved results in %s"%outfile)
     print("Total run time : \t %.3f s"%(time.time()-st))
