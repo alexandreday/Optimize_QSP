@@ -213,7 +213,7 @@ class UTILS:
 			elif tmp[0] == 'str':
 				if param_name == 'task' and parameters['task'] == 'SD' :
 					param_value[i] = parameters[param_name] + str(parameters['n_flip'])
-				elif param_name == 'task' and parameters['para_evaluation'] == 1:
+				elif param_name == 'task' and parameters['para_evaluation'] == 1 and parameters['task'] == 'FO':
 					param_value[i] = parameters[param_name] + str(parameters['para_this_slice'])
 				else:
 					param_value[i]=parameters[param_name]
