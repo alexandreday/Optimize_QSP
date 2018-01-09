@@ -61,7 +61,7 @@ class UTILS:
 		n_elem = len(argv)
 		if n_elem > 1:
 			for i, arg in zip(range(n_elem),argv):
-				if i > 0:
+				if i > 0: # skip first argument which is the file name !
 					arg_split=arg.split('=')
 					# if arg is not specified properly this will trigger a dictionnary key error <--
 					if self.param_type[arg_split[0]] == int:

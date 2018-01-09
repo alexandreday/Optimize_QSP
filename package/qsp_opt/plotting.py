@@ -88,22 +88,23 @@ def protocol(protocol,T=None,title=None,out_file=None,label=None,show=True,ylabe
     
     if label is not None:
         ext_p=np.hstack((protocol,protocol[-1]))
-        plt.step(ext_ts,ext_p,'-',clip_on=False,c=palette[0],label=label,where='post')
-        plt.plot(time_slice,protocol,'o',clip_on=False,c=palette[0])
+        plt.step(ext_ts,ext_p,'-',clip_on=False,c=palette[0],label=label,where='post',lw=lw)
+        plt.plot(time_slice,protocol,'o',clip_on=False,c=palette[0],lw=lw)
         plt.legend(loc='best', shadow=True, fontsize=fontsize)
         
     else:
         ext_p=np.hstack((protocol,protocol[-1]))
-        plt.step(ext_ts,ext_p,'-',clip_on=False,c=palette[0],where='post')
-        plt.plot(time_slice,protocol,'o',clip_on=False,c=palette[0])
-        
+        plt.step(ext_ts,ext_p,'-',clip_on=False, c=palette[0],where='post',lw=lw)
+        plt.plot(time_slice,protocol,'o',clip_on=False,c=palette[0],lw=lw)
+    
     if title is not None:
         plt.title(title,fontsize=fontsize)
 
     plt.tick_params(labelsize=fontsize)
     
-
-    plt.xlim([np.min(ext_ts),np.max(ext_ts)])
+    xmin, xmax = (np.min(ext_ts),np.max(ext_ts))
+    dx = xmax-xmin
+    plt.xlim((xmin-0.02*dx, xmax+0.02*dx))
     if xlabel is not None:
         plt.xlabel(xlabel,fontsize=fontsize+4)
     if ylabel is not None:
