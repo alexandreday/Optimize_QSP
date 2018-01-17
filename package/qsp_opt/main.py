@@ -17,6 +17,7 @@ from quspin.operators import exp_op
 import time, sys, os, pickle
 from itertools import product
 from .model import MODEL
+from .SD import SD
     
 np.set_printoptions(precision=10)
 
@@ -88,6 +89,20 @@ class QSP:
             
         fname = self.utils.make_file_name(param_tmp)
         return fname
+
+    def optimize(self, protocol_init = None):
+        """ Just optimize using specified method and initial protocol, performs one run 
+        Returns:
+        --------
+            best_fid, best_protocol, n_fid_eval, n_visit, fid_series
+        """
+        init_random = True
+        if protocol_init is not None:
+            self.model.update_protocol(protocol_init)
+            init_random=False
+        optimizer = SD(self.parameters, self.model, nflip=self.parameters['n_flip'], init_random=init_random)
+        #best_fid, best_protocol, n_fid_eval, n_visit, fid_series = optimizer.run()
+        return optimizer.run()
 
 ###################################################################################
 ###################################################################################
@@ -205,8 +220,6 @@ def SA(param, model:MODEL):
     return best_fid, best_protocol, n_quench
 
 def run_SD(parameters, model:MODEL, utils, save = True):
-
-    from .SD import SD
 
     outfile = utils.make_file_name(parameters,root=parameters['root'])
     n_exist_sample, all_result = utils.read_current_results(outfile)

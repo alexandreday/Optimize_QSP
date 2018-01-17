@@ -61,7 +61,9 @@ def density_map(X, kde, savefile='test.png', show=True, xlabel=None, ylabel=None
     #plt.show()
 
 
-def protocol(protocol,T=None,title=None,out_file=None,label=None,show=True,ylabel='$h_x(t)$',xlabel="$t$",lw=5):
+def protocol(protocol,T=None,title=None,out_file=None,label=None,show=True,ylabel='$h_x(t)$',xlabel="$t$",lw=5,c_idx=0, ax=None,
+figsize=(8,4)
+):
     """
     Purpose:
         Plots protocol vs time in latex form
@@ -73,7 +75,10 @@ def protocol(protocol,T=None,title=None,out_file=None,label=None,show=True,ylabe
     palette=[plt.get_cmap('Dark2')(0),plt.get_cmap('Dark2')(10),plt.get_cmap('Dark2')(20)]
 
     # fig size
-    plt.figure(figsize=(8,4))
+    if ax is None:
+        fig,ax = plt.subplots(figsize=figsize)
+    
+    #ax.figure(figsize=(8,4))
     #n_curve=len(protocols)
 
     #palette = np.array(sns.color_palette('hls',n_curve))
@@ -88,19 +93,19 @@ def protocol(protocol,T=None,title=None,out_file=None,label=None,show=True,ylabe
     
     if label is not None:
         ext_p=np.hstack((protocol,protocol[-1]))
-        plt.step(ext_ts,ext_p,'-',clip_on=False,c=palette[0],label=label,where='post',lw=lw)
-        plt.plot(time_slice,protocol,'o',clip_on=False,c=palette[0],lw=lw)
-        plt.legend(loc='best', shadow=True, fontsize=fontsize)
+        ax.step(ext_ts,ext_p,'-',clip_on=False,c=palette[c_idx],label=label,where='post',lw=lw)
+        ax.plot(time_slice,protocol,'o',clip_on=False,c=palette[c_idx],lw=lw)
+        ax.legend(loc='best', shadow=True, fontsize=fontsize)
         
     else:
         ext_p=np.hstack((protocol,protocol[-1]))
-        plt.step(ext_ts,ext_p,'-',clip_on=False, c=palette[0],where='post',lw=lw)
-        plt.plot(time_slice,protocol,'o',clip_on=False,c=palette[0],lw=lw)
+        ax.step(ext_ts,ext_p,'-',clip_on=False, c=palette[c_idx],where='post',lw=lw)
+        ax.plot(time_slice,protocol,'o',clip_on=False,c=palette[c_idx],lw=lw)
     
     if title is not None:
-        plt.title(title,fontsize=fontsize)
+        ax.title(title,fontsize=fontsize)
 
-    plt.tick_params(labelsize=fontsize)
+    ax.tick_params(labelsize=fontsize)
     
     xmin, xmax = (np.min(ext_ts),np.max(ext_ts))
     dx = xmax-xmin
@@ -111,12 +116,13 @@ def protocol(protocol,T=None,title=None,out_file=None,label=None,show=True,ylabe
         plt.ylabel(ylabel,fontsize=fontsize+4)
         
     # avoids x axis label being cut off
-    plt.tight_layout()
     if out_file is not None:
         plt.savefig(out_file)
     if show:
+        plt.tight_layout()
         plt.show()
-    plt.close()
+    return ax
+    #plt.close()
 
 
 def adjust_format(my_array):
