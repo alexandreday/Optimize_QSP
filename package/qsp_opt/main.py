@@ -462,9 +462,6 @@ def run_FO(parameters, model:MODEL, utils):
 
 
 
-
-
-
 def symmetrize_protocol(hx_protocol):
     Nstep=len(hx_protocol)
     half_N=int(Nstep/2)
