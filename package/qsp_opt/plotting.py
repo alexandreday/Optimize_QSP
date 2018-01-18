@@ -103,7 +103,7 @@ figsize=(8,4)
         ax.plot(time_slice,protocol,'o',clip_on=False,c=palette[c_idx],lw=lw)
     
     if title is not None:
-        ax.title(title,fontsize=fontsize)
+        plt.title(title,fontsize=fontsize)
 
     ax.tick_params(labelsize=fontsize)
     
