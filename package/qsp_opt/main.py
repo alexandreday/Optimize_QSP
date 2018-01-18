@@ -22,7 +22,7 @@ from .SD import SD
 np.set_printoptions(precision=10)
 
 class QSP:
-    def __init__(self, argv = None, parameter_file = "para.dat", symm = True, verbose=True, quick_check=False):
+    def __init__(self, argv = None, parameter_file = "para.dat", symm = True, quick_check=False):
         # Utility object for reading, writing parameters, etc. 
         self.utils = UTILS()
         
@@ -33,7 +33,7 @@ class QSP:
         if argv is not None:
             self.utils.read_command_line_arg(self.parameters, argv)
 
-        if verbose is True:
+        if self.parameters['verbose'] == 0:
         # Printing parameters for user to see
             self.utils.print_parameters(self.parameters)
 
