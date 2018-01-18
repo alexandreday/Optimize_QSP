@@ -33,7 +33,7 @@ class QSP:
         if argv is not None:
             self.utils.read_command_line_arg(self.parameters, argv)
 
-        if self.parameters['verbose'] == 0:
+        if self.parameters['verbose'] == 1:
         # Printing parameters for user to see
             self.utils.print_parameters(self.parameters)
 
