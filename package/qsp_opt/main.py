@@ -248,12 +248,12 @@ def run_SD(parameters, model:MODEL, utils, save = True):
 
     for it in range(n_iteration_left):
         start_time=time.time()
-        best_fid, best_protocol, n_fid_eval, n_visit, fid_series = optimizer.run()
+        best_fid, best_protocol, n_fid_eval, n_visit, fid_series, move_history = optimizer.run()
 
         energy = model.compute_energy(protocol = best_protocol)
-        result = [n_fid_eval, best_fid, energy, n_visit, best_protocol, fid_series] # -------> THIS IS WHAT WILL BE STORED IN THE PICKLE FILE 
+        result = [n_fid_eval, best_fid, energy, n_visit, best_protocol, fid_series, move_history] # -------> THIS IS WHAT WILL BE STORED IN THE PICKLE FILE 
         if parameters['compress_output'] == 'wo_protocol':
-            result = [n_fid_eval, best_fid, energy, n_visit, [-1], fid_series]
+            result = [n_fid_eval, best_fid, energy, n_visit, [-1], fid_series, move_history]
 
         print("\n----------> RESULT FOR STOCHASTIC DESCENT NO %i <-------------"%(it+1))
         print("Number of fidelity eval \t%i"%n_fid_eval)

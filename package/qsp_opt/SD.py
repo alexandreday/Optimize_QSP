@@ -38,6 +38,7 @@ class SD:
         fid_series = [old_fid]
         n_fid_eval = 1
         n_visit = 1
+        move_history = []
         local_minima_reached = False
 
         while not local_minima_reached:
@@ -52,6 +53,7 @@ class SD:
                 if new_fid > old_fid:
                     old_fid = new_fid
                     fid_series.append(old_fid)
+                    move_history.append(idx_flip)
                     n_visit += 1
                     break
                 else:
@@ -60,7 +62,7 @@ class SD:
                 if move == self.order[-1]: # meaning it went through the whole sequence !
                     local_minima_reached = True
       
-        return old_fid, np.copy(model.protocol()), n_fid_eval, n_visit, fid_series
+        return old_fid, np.copy(model.protocol()), n_fid_eval, n_visit, fid_series, move_history
 
     def run_wo_fid_series(self):
         
@@ -89,4 +91,4 @@ class SD:
                 if move == self.order[-1]: # meaning it went through the whole sequence !
                     local_minima_reached = True
       
-        return old_fid, np.copy(model.protocol()), n_fid_eval, n_visit, [-1]
+        return old_fid, np.copy(model.protocol()), n_fid_eval, n_visit, [-1], [-1]
