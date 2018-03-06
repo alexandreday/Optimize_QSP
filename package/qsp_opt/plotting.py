@@ -248,23 +248,3 @@ def trajectory(traj,c_idx):
     #plt.ylim((-0.05,1.1))
     plt.xlim((-10,1200))
     plt.show()
-
-def main():
-    print("heelo")
-    #n_cluster=3
-    #from sklearn.datasets import make_blobs
-    #X,y=make_blobs(n_samples=1000,random_state=0,centers=n_cluster)
-
-    #for i in range(n_cluster):
-    #    Xi=X[y==i]
-    #    plt.scatter(Xi[:,0],Xi[:,1])
-    #plt.show()
-    #kde=KernelDensity(bandwidth=0.2, algorithm='kd_tree')#, atol=0.00001, rtol=0.000001)
-    #kde.fit(X)
-    #z=kde.score_samples(X)
-    #plt.scatter(X[:,0],X[:,1],c=z,cmap='coolwarm')
-    #plt.show()
-    #density_map(X)
-
-if __name__== "__main__":
-    main()
