@@ -22,4 +22,7 @@ git pull origin master
 pip install . --upgrade
 ```
 
+# Citation
+If you use this package in a publication, please cite :
+- Reinforcement Learning in Different Phases of Quantum Control: arXiv:1705.00565 
 
