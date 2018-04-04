@@ -78,6 +78,7 @@ class QSP:
     def flip(self, p, i):
         ptmp = np.copy(p) # pretty slow !
         ptmp[i]^=1
+        
         return ptmp
     
     def make_file_name(self, parameters = None):
