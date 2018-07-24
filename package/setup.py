@@ -1,4 +1,6 @@
 from setuptools import setup
+from distutils.core import setup
+from Cython.Build import cythonize
 
 setup(name='QSP optimization',
       version='0.0',
@@ -9,5 +11,6 @@ setup(name='QSP optimization',
       license='MIT',
       packages=['qsp_opt'],
       zip_safe=False,
-      include_package_data=True
+      include_package_data=True,
+      ext_modules = cythonize("qsp_opt/cythonUtils.pyx")
 )
