@@ -2,7 +2,7 @@ import numpy as np
 import time
 import copy
 from scipy.linalg import expm
-from .cython.cythonUtils import protocol_to_base10_int
+from .cython import protocol_to_base10_int
 
 def overlap(psi1,psi2):
     """ Square of overlap between two states """

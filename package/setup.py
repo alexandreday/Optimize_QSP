@@ -1,9 +1,15 @@
-from setuptools import setup
-from distutils.core import setup
+from setuptools import setup, Extension
 from Cython.Build import cythonize
 
-setup(name='QSP optimization',
-      version='0.0',
+extensions = [
+    Extension(
+        "qsp_opt.cython.cythonUtils",
+        ["qsp_opt/cython/cythonUtils.pyx"]
+    ),
+]
+
+setup(name='qsp_opti',
+      version='0.1',
       description='Optimization of quantum state preparation',
       url='https://github.com/alexandreday/https://github.com/alexandreday/Optimize_QSP',
       author='Alexandre Day',
@@ -12,5 +18,5 @@ setup(name='QSP optimization',
       packages=['qsp_opt'],
       zip_safe=False,
       include_package_data=True,
-      ext_modules = cythonize("qsp_opt/cythonUtils.pyx")
+      ext_modules=cythonize(extensions)
 )

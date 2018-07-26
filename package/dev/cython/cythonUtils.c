@@ -5,7 +5,7 @@
     "distutils": {
         "name": "cythonUtils",
         "sources": [
-            "/Users/alexandreday/GitProject/Optimize_QSP/package/dev/cython/cythonUtils.pyx"
+            "/Users/alexandreday/GitProject/Optimize_QSP/package/qsp_opt/cython/cythonUtils.pyx"
         ]
     },
     "module_name": "cythonUtils"
