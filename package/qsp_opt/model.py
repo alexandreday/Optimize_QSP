@@ -87,18 +87,23 @@ class MODEL:
                 init_matrix = self.precompute_mat[idx].dot(init_matrix)
             #########################
             self.precompute_protocol[i] = init_matrix # all info stored here 
-        
+    
     def compute_evolved_state(self, protocol=None): 
         """ Compute the evolved state by applying unitaries to protocol """
         if protocol is None:
             protocol = self.H.hx_discrete
-        psi_evolve=self.psi_i.copy()
-
+        psi_evolve=self.psi_i.copy().astype(np.complex128)
+        #print(psi_evolve)
+        #exit()
+        #print(psi_evolve.dtype)
+        #print(self.precompute_protocol[0].dtype)
+        #exit()
         if self.split_protocol is True:
             n_partition = len(protocol) // self.split_size
 
             pos_i = 0
             for i in range(n_partition):
+                #idx = self.prot_to_b10(protocol, pos_i, pos_i+self.split_size)
                 idx = protocol_to_base10_int(protocol, pos_i, pos_i+self.split_size)
                 pos_i+=self.split_size
                 psi_evolve = self.precompute_protocol[idx].dot(psi_evolve)

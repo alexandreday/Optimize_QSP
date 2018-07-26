@@ -1,7 +1,9 @@
 # cython: infer_types=True
 cimport cython
+import numpy as np
+import scipy.linalg.blas
 
-#@cython.boundscheck(False) # turn off bounds-checking for entire function
+@cython.boundscheck(False) # turn off bounds-checking for entire function
 @cython.wraparound(False)
 
 def protocol_to_base10_int(long [:] protocol, int x1, int x2):

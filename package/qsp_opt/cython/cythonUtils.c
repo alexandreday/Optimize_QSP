@@ -3,12 +3,12 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "name": "cythonUtils",
+        "name": "dev.cython.cythonUtils",
         "sources": [
-            "/Users/alexandreday/GitProject/Optimize_QSP/package/qsp_opt/cython/cythonUtils.pyx"
+            "/Users/alexandreday/GitProject/Optimize_QSP/package/dev/cython/cythonUtils.pyx"
         ]
     },
-    "module_name": "cythonUtils"
+    "module_name": "dev.cython.cythonUtils"
 }
 END: Cython Metadata */
 
@@ -570,8 +570,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__cythonUtils
-#define __PYX_HAVE_API__cythonUtils
+#define __PYX_HAVE__dev__cython__cythonUtils
+#define __PYX_HAVE_API__dev__cython__cythonUtils
 /* Early includes */
 #include "pythread.h"
 #include <string.h>
@@ -1110,9 +1110,6 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
 
-/* BufferIndexError.proto */
-static void __Pyx_RaiseBufferIndexError(int axis);
-
 /* MemviewSliceInit.proto */
 #define __Pyx_BUF_MAX_NDIMS %(BUF_MAX_NDIMS)d
 #define __Pyx_MEMVIEW_DIRECT   1
@@ -1585,7 +1582,7 @@ static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memo
 
 /* Module declarations from 'cython' */
 
-/* Module declarations from 'cythonUtils' */
+/* Module declarations from 'dev.cython.cythonUtils' */
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
@@ -1631,11 +1628,11 @@ static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static PyObject *__pyx_unpickle_Enum__set_state(struct __pyx_MemviewEnum_obj *, PyObject *); /*proto*/
 static __Pyx_TypeInfo __Pyx_TypeInfo_long = { "long", NULL, sizeof(long), { 0 }, 0, IS_UNSIGNED(long) ? 'U' : 'I', IS_UNSIGNED(long), 0 };
-#define __Pyx_MODULE_NAME "cythonUtils"
-extern int __pyx_module_is_main_cythonUtils;
-int __pyx_module_is_main_cythonUtils = 0;
+#define __Pyx_MODULE_NAME "dev.cython.cythonUtils"
+extern int __pyx_module_is_main_dev__cython__cythonUtils;
+int __pyx_module_is_main_dev__cython__cythonUtils = 0;
 
-/* Implementation of 'cythonUtils' */
+/* Implementation of 'dev.cython.cythonUtils' */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_ValueError;
 static PyObject *__pyx_builtin_MemoryError;
@@ -1651,6 +1648,7 @@ static const char __pyx_k_i[] = "i";
 static const char __pyx_k_l[] = "l";
 static const char __pyx_k_p[] = "p";
 static const char __pyx_k_id[] = "id";
+static const char __pyx_k_np[] = "np";
 static const char __pyx_k_x1[] = "x1";
 static const char __pyx_k_x2[] = "x2";
 static const char __pyx_k_new[] = "__new__";
@@ -1671,7 +1669,9 @@ static const char __pyx_k_ASCII[] = "ASCII";
 static const char __pyx_k_class[] = "__class__";
 static const char __pyx_k_error[] = "error";
 static const char __pyx_k_flags[] = "flags";
+static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_range[] = "range";
+static const char __pyx_k_scipy[] = "scipy";
 static const char __pyx_k_shape[] = "shape";
 static const char __pyx_k_start[] = "start";
 static const char __pyx_k_value[] = "value";
@@ -1702,7 +1702,6 @@ static const char __pyx_k_pyx_result[] = "__pyx_result";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_PickleError[] = "PickleError";
-static const char __pyx_k_cythonUtils[] = "cythonUtils";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_stringsource[] = "stringsource";
 static const char __pyx_k_pyx_getbuffer[] = "__pyx_getbuffer";
@@ -1714,11 +1713,13 @@ static const char __pyx_k_dtype_is_object[] = "dtype_is_object";
 static const char __pyx_k_pyx_PickleError[] = "__pyx_PickleError";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_pyx_unpickle_Enum[] = "__pyx_unpickle_Enum";
+static const char __pyx_k_scipy_linalg_blas[] = "scipy.linalg.blas";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static const char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static const char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
 static const char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>";
+static const char __pyx_k_dev_cython_cythonUtils[] = "dev.cython.cythonUtils";
 static const char __pyx_k_protocol_to_base10_int[] = "protocol_to_base10_int";
 static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x>";
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
@@ -1772,8 +1773,8 @@ static PyObject *__pyx_n_s_class;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
-static PyObject *__pyx_n_s_cythonUtils;
 static PyObject *__pyx_kp_s_cythonUtils_pyx;
+static PyObject *__pyx_n_s_dev_cython_cythonUtils;
 static PyObject *__pyx_n_s_dict;
 static PyObject *__pyx_n_s_dtype_is_object;
 static PyObject *__pyx_n_s_encode;
@@ -1799,6 +1800,8 @@ static PyObject *__pyx_n_s_name_2;
 static PyObject *__pyx_n_s_ndim;
 static PyObject *__pyx_n_s_new;
 static PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
+static PyObject *__pyx_n_s_np;
+static PyObject *__pyx_n_s_numpy;
 static PyObject *__pyx_n_s_obj;
 static PyObject *__pyx_n_s_p;
 static PyObject *__pyx_n_s_pack;
@@ -1817,6 +1820,8 @@ static PyObject *__pyx_n_s_range;
 static PyObject *__pyx_n_s_reduce;
 static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
+static PyObject *__pyx_n_s_scipy;
+static PyObject *__pyx_n_s_scipy_linalg_blas;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_shape;
@@ -1838,7 +1843,7 @@ static PyObject *__pyx_n_s_value;
 static PyObject *__pyx_n_s_x1;
 static PyObject *__pyx_n_s_x2;
 static PyObject *__pyx_n_s_x2m1;
-static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_protocol, int __pyx_v_x1, int __pyx_v_x2); /* proto */
+static PyObject *__pyx_pf_3dev_6cython_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_protocol, int __pyx_v_x1, int __pyx_v_x2); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -1921,7 +1926,7 @@ static PyObject *__pyx_codeobj__23;
 static PyObject *__pyx_codeobj__30;
 /* Late includes */
 
-/* "cythonUtils.pyx":7
+/* "dev/cython/cythonUtils.pyx":9
  * @cython.wraparound(False)
  * 
  * def protocol_to_base10_int(long [:] protocol, int x1, int x2):             # <<<<<<<<<<<<<<
@@ -1930,9 +1935,9 @@ static PyObject *__pyx_codeobj__30;
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_11cythonUtils_1protocol_to_base10_int(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_11cythonUtils_1protocol_to_base10_int = {"protocol_to_base10_int", (PyCFunction)__pyx_pw_11cythonUtils_1protocol_to_base10_int, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_11cythonUtils_1protocol_to_base10_int(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_3dev_6cython_11cythonUtils_1protocol_to_base10_int(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_3dev_6cython_11cythonUtils_1protocol_to_base10_int = {"protocol_to_base10_int", (PyCFunction)__pyx_pw_3dev_6cython_11cythonUtils_1protocol_to_base10_int, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_3dev_6cython_11cythonUtils_1protocol_to_base10_int(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_protocol = { 0, 0, { 0 }, { 0 }, { 0 } };
   int __pyx_v_x1;
   int __pyx_v_x2;
@@ -1964,17 +1969,17 @@ static PyObject *__pyx_pw_11cythonUtils_1protocol_to_base10_int(PyObject *__pyx_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_x1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("protocol_to_base10_int", 1, 3, 3, 1); __PYX_ERR(0, 7, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("protocol_to_base10_int", 1, 3, 3, 1); __PYX_ERR(0, 9, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_x2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("protocol_to_base10_int", 1, 3, 3, 2); __PYX_ERR(0, 7, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("protocol_to_base10_int", 1, 3, 3, 2); __PYX_ERR(0, 9, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "protocol_to_base10_int") < 0)) __PYX_ERR(0, 7, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "protocol_to_base10_int") < 0)) __PYX_ERR(0, 9, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1983,26 +1988,26 @@ static PyObject *__pyx_pw_11cythonUtils_1protocol_to_base10_int(PyObject *__pyx_
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_protocol = __Pyx_PyObject_to_MemoryviewSlice_ds_long(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_protocol.memview)) __PYX_ERR(0, 7, __pyx_L3_error)
-    __pyx_v_x1 = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_x1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 7, __pyx_L3_error)
-    __pyx_v_x2 = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_x2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 7, __pyx_L3_error)
+    __pyx_v_protocol = __Pyx_PyObject_to_MemoryviewSlice_ds_long(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_protocol.memview)) __PYX_ERR(0, 9, __pyx_L3_error)
+    __pyx_v_x1 = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_x1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L3_error)
+    __pyx_v_x2 = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_x2 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("protocol_to_base10_int", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 7, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("protocol_to_base10_int", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 9, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("cythonUtils.protocol_to_base10_int", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("dev.cython.cythonUtils.protocol_to_base10_int", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_11cythonUtils_protocol_to_base10_int(__pyx_self, __pyx_v_protocol, __pyx_v_x1, __pyx_v_x2);
+  __pyx_r = __pyx_pf_3dev_6cython_11cythonUtils_protocol_to_base10_int(__pyx_self, __pyx_v_protocol, __pyx_v_x1, __pyx_v_x2);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_protocol, int __pyx_v_x1, int __pyx_v_x2) {
+static PyObject *__pyx_pf_3dev_6cython_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_protocol, int __pyx_v_x1, int __pyx_v_x2) {
   int __pyx_v_value;
   int __pyx_v_p;
   int __pyx_v_l;
@@ -2015,11 +2020,10 @@ static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyO
   int __pyx_t_3;
   int __pyx_t_4;
   Py_ssize_t __pyx_t_5;
-  int __pyx_t_6;
-  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_6 = NULL;
   __Pyx_RefNannySetupContext("protocol_to_base10_int", 0);
 
-  /* "cythonUtils.pyx":8
+  /* "dev/cython/cythonUtils.pyx":10
  * 
  * def protocol_to_base10_int(long [:] protocol, int x1, int x2):
  *         cdef int value, p=2, b, l, i, x2m1             # <<<<<<<<<<<<<<
@@ -2028,7 +2032,7 @@ static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyO
  */
   __pyx_v_p = 2;
 
-  /* "cythonUtils.pyx":9
+  /* "dev/cython/cythonUtils.pyx":11
  * def protocol_to_base10_int(long [:] protocol, int x1, int x2):
  *         cdef int value, p=2, b, l, i, x2m1
  *         value = protocol[x2-1]             # <<<<<<<<<<<<<<
@@ -2036,17 +2040,9 @@ static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyO
  *         l = x2-x1
  */
   __pyx_t_1 = (__pyx_v_x2 - 1);
-  __pyx_t_2 = -1;
-  if (__pyx_t_1 < 0) {
-    __pyx_t_2 = 0;
-  } else if (unlikely(__pyx_t_1 >= __pyx_v_protocol.shape[0])) __pyx_t_2 = 0;
-  if (unlikely(__pyx_t_2 != -1)) {
-    __Pyx_RaiseBufferIndexError(__pyx_t_2);
-    __PYX_ERR(0, 9, __pyx_L1_error)
-  }
   __pyx_v_value = (*((long *) ( /* dim=0 */ (__pyx_v_protocol.data + __pyx_t_1 * __pyx_v_protocol.strides[0]) )));
 
-  /* "cythonUtils.pyx":10
+  /* "dev/cython/cythonUtils.pyx":12
  *         cdef int value, p=2, b, l, i, x2m1
  *         value = protocol[x2-1]
  *         x2m1 = x2-1             # <<<<<<<<<<<<<<
@@ -2055,7 +2051,7 @@ static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyO
  */
   __pyx_v_x2m1 = (__pyx_v_x2 - 1);
 
-  /* "cythonUtils.pyx":11
+  /* "dev/cython/cythonUtils.pyx":13
  *         value = protocol[x2-1]
  *         x2m1 = x2-1
  *         l = x2-x1             # <<<<<<<<<<<<<<
@@ -2064,7 +2060,7 @@ static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyO
  */
   __pyx_v_l = (__pyx_v_x2 - __pyx_v_x1);
 
-  /* "cythonUtils.pyx":12
+  /* "dev/cython/cythonUtils.pyx":14
  *         x2m1 = x2-1
  *         l = x2-x1
  *         for i in range(1, l):             # <<<<<<<<<<<<<<
@@ -2076,7 +2072,7 @@ static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyO
   for (__pyx_t_4 = 1; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "cythonUtils.pyx":13
+    /* "dev/cython/cythonUtils.pyx":15
  *         l = x2-x1
  *         for i in range(1, l):
  *                 value = value + p*protocol[x2m1-i]             # <<<<<<<<<<<<<<
@@ -2084,17 +2080,9 @@ static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyO
  *         return value
  */
     __pyx_t_5 = (__pyx_v_x2m1 - __pyx_v_i);
-    __pyx_t_6 = -1;
-    if (__pyx_t_5 < 0) {
-      __pyx_t_6 = 0;
-    } else if (unlikely(__pyx_t_5 >= __pyx_v_protocol.shape[0])) __pyx_t_6 = 0;
-    if (unlikely(__pyx_t_6 != -1)) {
-      __Pyx_RaiseBufferIndexError(__pyx_t_6);
-      __PYX_ERR(0, 13, __pyx_L1_error)
-    }
     __pyx_v_value = (__pyx_v_value + (__pyx_v_p * (*((long *) ( /* dim=0 */ (__pyx_v_protocol.data + __pyx_t_5 * __pyx_v_protocol.strides[0]) )))));
 
-    /* "cythonUtils.pyx":14
+    /* "dev/cython/cythonUtils.pyx":16
  *         for i in range(1, l):
  *                 value = value + p*protocol[x2m1-i]
  *                 p*=2             # <<<<<<<<<<<<<<
@@ -2103,19 +2091,19 @@ static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyO
     __pyx_v_p = (__pyx_v_p * 2);
   }
 
-  /* "cythonUtils.pyx":15
+  /* "dev/cython/cythonUtils.pyx":17
  *                 value = value + p*protocol[x2m1-i]
  *                 p*=2
  *         return value             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_value); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_r = __pyx_t_7;
-  __pyx_t_7 = 0;
+  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_value); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_r = __pyx_t_6;
+  __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "cythonUtils.pyx":7
+  /* "dev/cython/cythonUtils.pyx":9
  * @cython.wraparound(False)
  * 
  * def protocol_to_base10_int(long [:] protocol, int x1, int x2):             # <<<<<<<<<<<<<<
@@ -2125,8 +2113,8 @@ static PyObject *__pyx_pf_11cythonUtils_protocol_to_base10_int(CYTHON_UNUSED PyO
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("cythonUtils.protocol_to_base10_int", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_AddTraceback("dev.cython.cythonUtils.protocol_to_base10_int", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_protocol, 1);
@@ -15173,7 +15161,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "cythonUtils.array", /*tp_name*/
+  "dev.cython.cythonUtils.array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -15281,7 +15269,7 @@ static PyMethodDef __pyx_methods_Enum[] = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "cythonUtils.Enum", /*tp_name*/
+  "dev.cython.cythonUtils.Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -15531,7 +15519,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "cythonUtils.memoryview", /*tp_name*/
+  "dev.cython.cythonUtils.memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -15658,7 +15646,7 @@ static struct PyGetSetDef __pyx_getsets__memoryviewslice[] = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "cythonUtils._memoryviewslice", /*tp_name*/
+  "dev.cython.cythonUtils._memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -15791,8 +15779,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
-  {&__pyx_n_s_cythonUtils, __pyx_k_cythonUtils, sizeof(__pyx_k_cythonUtils), 0, 0, 1, 1},
   {&__pyx_kp_s_cythonUtils_pyx, __pyx_k_cythonUtils_pyx, sizeof(__pyx_k_cythonUtils_pyx), 0, 0, 1, 0},
+  {&__pyx_n_s_dev_cython_cythonUtils, __pyx_k_dev_cython_cythonUtils, sizeof(__pyx_k_dev_cython_cythonUtils), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
   {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
@@ -15818,6 +15806,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ndim, __pyx_k_ndim, sizeof(__pyx_k_ndim), 0, 0, 1, 1},
   {&__pyx_n_s_new, __pyx_k_new, sizeof(__pyx_k_new), 0, 0, 1, 1},
   {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
+  {&__pyx_n_s_np, __pyx_k_np, sizeof(__pyx_k_np), 0, 0, 1, 1},
+  {&__pyx_n_s_numpy, __pyx_k_numpy, sizeof(__pyx_k_numpy), 0, 0, 1, 1},
   {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
   {&__pyx_n_s_p, __pyx_k_p, sizeof(__pyx_k_p), 0, 0, 1, 1},
   {&__pyx_n_s_pack, __pyx_k_pack, sizeof(__pyx_k_pack), 0, 0, 1, 1},
@@ -15836,6 +15826,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
+  {&__pyx_n_s_scipy, __pyx_k_scipy, sizeof(__pyx_k_scipy), 0, 0, 1, 1},
+  {&__pyx_n_s_scipy_linalg_blas, __pyx_k_scipy_linalg_blas, sizeof(__pyx_k_scipy_linalg_blas), 0, 0, 1, 1},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_n_s_shape, __pyx_k_shape, sizeof(__pyx_k_shape), 0, 0, 1, 1},
@@ -15860,7 +15852,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 12, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 14, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 132, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 147, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 150, __pyx_L1_error)
@@ -16102,17 +16094,17 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__21);
   __Pyx_GIVEREF(__pyx_tuple__21);
 
-  /* "cythonUtils.pyx":7
+  /* "dev/cython/cythonUtils.pyx":9
  * @cython.wraparound(False)
  * 
  * def protocol_to_base10_int(long [:] protocol, int x1, int x2):             # <<<<<<<<<<<<<<
  *         cdef int value, p=2, b, l, i, x2m1
  *         value = protocol[x2-1]
  */
-  __pyx_tuple__22 = PyTuple_Pack(9, __pyx_n_s_protocol, __pyx_n_s_x1, __pyx_n_s_x2, __pyx_n_s_value, __pyx_n_s_p, __pyx_n_s_b, __pyx_n_s_l, __pyx_n_s_i, __pyx_n_s_x2m1); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_tuple__22 = PyTuple_Pack(9, __pyx_n_s_protocol, __pyx_n_s_x1, __pyx_n_s_x2, __pyx_n_s_value, __pyx_n_s_p, __pyx_n_s_b, __pyx_n_s_l, __pyx_n_s_i, __pyx_n_s_x2m1); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__22);
   __Pyx_GIVEREF(__pyx_tuple__22);
-  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cythonUtils_pyx, __pyx_n_s_protocol_to_base10_int, 7, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_codeobj__23 = (PyObject*)__Pyx_PyCode_New(3, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__22, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cythonUtils_pyx, __pyx_n_s_protocol_to_base10_int, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__23)) __PYX_ERR(0, 9, __pyx_L1_error)
 
   /* "View.MemoryView":285
  *         return self.name
@@ -16457,14 +16449,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_cythonUtils) {
+  if (__pyx_module_is_main_dev__cython__cythonUtils) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "cythonUtils")) {
-      if (unlikely(PyDict_SetItemString(modules, "cythonUtils", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "dev.cython.cythonUtils")) {
+      if (unlikely(PyDict_SetItemString(modules, "dev.cython.cythonUtils", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -16485,22 +16477,46 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "cythonUtils.pyx":7
+  /* "dev/cython/cythonUtils.pyx":3
+ * # cython: infer_types=True
+ * cimport cython
+ * import numpy as np             # <<<<<<<<<<<<<<
+ * import scipy.linalg.blas
+ * 
+ */
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_numpy, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_1) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "dev/cython/cythonUtils.pyx":4
+ * cimport cython
+ * import numpy as np
+ * import scipy.linalg.blas             # <<<<<<<<<<<<<<
+ * 
+ * @cython.boundscheck(False) # turn off bounds-checking for entire function
+ */
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_scipy_linalg_blas, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_scipy, __pyx_t_1) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "dev/cython/cythonUtils.pyx":9
  * @cython.wraparound(False)
  * 
  * def protocol_to_base10_int(long [:] protocol, int x1, int x2):             # <<<<<<<<<<<<<<
  *         cdef int value, p=2, b, l, i, x2m1
  *         value = protocol[x2-1]
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11cythonUtils_1protocol_to_base10_int, NULL, __pyx_n_s_cythonUtils); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_3dev_6cython_11cythonUtils_1protocol_to_base10_int, NULL, __pyx_n_s_dev_cython_cythonUtils); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_protocol_to_base10_int, __pyx_t_1) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_protocol_to_base10_int, __pyx_t_1) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cythonUtils.pyx":1
+  /* "dev/cython/cythonUtils.pyx":1
  * # cython: infer_types=True             # <<<<<<<<<<<<<<
  * cimport cython
- * 
+ * import numpy as np
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -16667,11 +16683,11 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init cythonUtils", 0, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init dev.cython.cythonUtils", 0, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init cythonUtils");
+    PyErr_SetString(PyExc_ImportError, "init dev.cython.cythonUtils");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -16870,12 +16886,6 @@ invalid_keyword:
     #endif
 bad:
     return -1;
-}
-
-/* BufferIndexError */
-static void __Pyx_RaiseBufferIndexError(int axis) {
-  PyErr_Format(PyExc_IndexError,
-     "Out of bounds on buffer access (axis %d)", axis);
 }
 
 /* MemviewSliceInit */
