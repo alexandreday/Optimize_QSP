@@ -25,13 +25,15 @@ class QSP:
     def __init__(self, argv = None, parameter_file = "para.dat", symm = True, quick_check=False):
         # Utility object for reading, writing parameters, etc. 
         self.utils = UTILS()
+        self.parameters = {}
         
-        # Reading parameters from para.dat file
-        self.parameters = self.utils.read_parameter_file(file=parameter_file)
-        
-        # Command line specified parameters overide parameter file values
         if argv is not None:
             self.utils.read_command_line_arg(self.parameters, argv)
+
+        # Reading parameters from para.dat file
+        self.utils.read_parameter_file(self.parameters, file=parameter_file)
+        
+        # Command line specified parameters overide parameter file values
 
         if self.parameters['verbose'] == 1:
         # Printing parameters for user to see
@@ -229,6 +231,7 @@ def run_SD(parameters, model:MODEL, utils, save = True):
     if n_exist_sample >= n_sample :
         print("Samples already computed in file --> terminating...")
         all_fids = [f[1] for f in all_result]
+        print("Max fidelity over samples :\t %.14f"%np.max(all_fids))
         print("Mean fidelity over samples :\t %.14f"%np.mean(all_fids))
         print("Std. fidelity over samples :\t %.14f"%np.std(all_fids))
         print("Goodbye !")
@@ -283,6 +286,7 @@ def run_SD(parameters, model:MODEL, utils, save = True):
             f.close()
 
     all_fids = [f[1] for f in all_result]
+    print("Max fidelity over samples :\t %.14f"%np.max(all_fids))
     print("Mean fidelity over samples :\t %.8f"%np.mean(all_fids))
     print("Std. fidelity over samples :\t %.8f"%np.std(all_fids))
     if parameters['compress_output'] != 'wo_protocol':

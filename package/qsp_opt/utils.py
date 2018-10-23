@@ -68,13 +68,8 @@ class UTILS:
 						parameters[arg_split[0]] = self.param_type[arg_split[0]](float(arg_split[1]))
 					else:
 						parameters[arg_split[0]] = self.param_type[arg_split[0]](arg_split[1])
-			
-		if parameters['dt'] < 0. : # time slices should be automatically computed 
-			parameters['dt'] = parameters['T']/parameters['n_step']
-		else:
-			parameters['T'] = parameters['dt']*parameters['n_step']
 
-	def read_parameter_file(self, file="para.dat"):
+	def read_parameter_file(self, parameters, file="para.dat"):
 		"""
 		Reads parameters from file para.dat (default)
 		Parameters are specified by a label and their value must be seperated by a space or a tab
@@ -91,21 +86,24 @@ class UTILS:
 				assert len(tmp) == 2, 'Wrong format for input file, need to have a space or tab separating parameter and its value'
 				info[tmp[0]] = tmp[1]
 
-		param = {}
 		for p in self.param_type.keys(): # cast strings to floats and ints !
-			if self.param_type[p] == bool:
-				if info[p] == 'True' or info[p] == '1':
-					param[p] = True
-				elif info[p] == 'False' or info[p] == '0':
-					param[p] = False
+			if p not in parameters:
+				if self.param_type[p] == bool:
+					if info[p] == 'True' or info[p] == '1':
+						parameters[p] = True
+					elif info[p] == 'False' or info[p] == '0':
+						parameters[p] = False
+					else:
+						assert False, 'Wrong boolean format'
+				elif self.param_type[p] == int:
+					parameters[p] = int(float(info[p])) # first cast to float then to int, some weird python bug ...
 				else:
-					assert False, 'Wrong boolean format'
-			elif self.param_type[p] == int:
-				param[p] = int(float(info[p])) # first cast to float then to int, some weird python bug ...
-			else:
-				param[p] = self.param_type[p](info[p])
-
-		return param
+					parameters[p] = self.param_type[p](info[p])
+		
+		if parameters['dt'] < 0. : # time slices should be automatically computed 
+			parameters['dt'] = parameters['T']/parameters['n_step']
+		else:
+			parameters['T'] = parameters['dt']*parameters['n_step']
 
 	def print_parameters(self, parameters):
 

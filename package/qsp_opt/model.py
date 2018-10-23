@@ -2,6 +2,7 @@ import numpy as np
 import time
 import copy
 from scipy.linalg import expm
+from numpy.linalg import multi_dot
 from .cython import protocol_to_base10_int
 
 def overlap(psi1,psi2):
@@ -108,8 +109,10 @@ class MODEL:
                 pos_i+=self.split_size
                 psi_evolve = self.precompute_protocol[idx].dot(psi_evolve)
         else:
+            #psi_evolve = multi_dot(self.precompute_mat[protocol]).dot(psi_evolve)
             for idx in protocol:
                 psi_evolve = self.precompute_mat[idx].dot(psi_evolve)
+
         return psi_evolve
     
     def compute_continuous_fidelity(self, continuous_protocol):
